@@ -1,0 +1,23 @@
+ASSUME CODE :CS
+CODE SEGMENT
+START:
+    MOV AX,2000H
+    MOV DS,AX
+    MOV SI,5000H
+    MOV CL,64H;length of string
+    MOV AL,0FEH
+    OUT 0EFH,AL;load cmd word
+    MOV AX,11H
+    OUT 0EFH,AL;
+    WAIT IN AL,0EFH
+    AND AL,01H
+    IZ WAIT
+    MOV AL[SI]
+    OUT 0FCH,AL
+    INC SI
+    DEC CL
+    INZ WAIT
+    MOV AH,4CH
+    CODE ENDS
+    END START
+    
